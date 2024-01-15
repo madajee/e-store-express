@@ -5,7 +5,7 @@ module.exports = {
       console.log("payload in register:");
       console.log(payload);
       return res.status(200).json({
-        status: true
+        status: false
       });
       
     },
