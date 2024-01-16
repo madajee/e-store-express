@@ -4,7 +4,7 @@ const router = require("express").Router();
 const AuthorizationController = require("./controllers/AuthorizationController");
 router.get(
     "/",
-    AuthorizationController.register
+    AuthorizationController.ping
   );
 
 router.post(
