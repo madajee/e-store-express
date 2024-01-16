@@ -7,4 +7,15 @@ router.get(
     AuthorizationController.register
   );
 
+router.post(
+  "/signup",
+  AuthorizationController.register
+);
+
+router.post(
+  "/login",
+  AuthorizationController.login
+);
+
+
 module.exports = router;
