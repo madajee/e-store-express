@@ -20,4 +20,5 @@ const sequelize = new Sequelize({
   dialect: "sqlite",
   storage: "data.db", // Path to the file that will store the SQLite DB.
 });
+5. "ajv": Ajv takes a schema for your JSON data and converts it into a very efficient JavaScript code that validates your data according to the schema.
 
