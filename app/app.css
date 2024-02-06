@@ -1,0 +1,78 @@
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background: #fafafa;
+}
+
+/* navbar */
+.navbar-custom {
+    background-color: #252423;
+  }
+  .navbar .nav-link {
+    font-size: 14px;
+    text-transform: uppercase;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  
+  .navbar .nav-item.active {
+    border-left: #444 3px solid;
+  } 
+  
+  .navbar .navbar-brand {
+    border-right: #444 3px solid;
+    padding-right: 0.5rem;
+  }
+
+.image {
+  background-color: white;
+  border: 1px solid black;
+  margin-bottom: 1em;
+  margin-right: 1em;
+  margin-left: 1em;
+  padding: 1em;
+  width: 80%;
+}
+
+/* Footer */
+
+.blockquote-box {
+  margin-bottom: 5px;
+  margin-left: 10px;
+  float:left;
+}
+
+.margin-right{
+  margin-right:15px;
+  margin-bottom: 5px;
+  font-size:15px
+}
+
+@media screen and (max-width: 992px) {
+  .hide-for-mobile{
+    display: none;
+  }
+  footer{
+    display: none;
+  }
+}
+
+ul.space_list li { margin-bottom: 1em; }
+
+.tab { margin-left: 40px; }
+
+.w3r-dot {
+  width: 1300px;
+  height: 7 0px;
+  border-style: groove;
+  margin: 0.5px;
+  margin-left: 25px;
+  padding: 20px;
+  text-align: center;
+  background-color: #ccc;
+  background-image: radial-gradient(#000 10%, transparent 11%),
+    radial-gradient(#e53935 10%, transparent 11%);
+  background-size: 50px 50px;
+  background-position: 0 0, 30px 30px;
+  background-repeat: repeat;
+}

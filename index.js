@@ -18,6 +18,7 @@ app.use(cors());
 // Middleware that parses the body payloads as JSON to be consumed next set
 // of middlewares and controllers.
 app.use(Express.json());
+app.use('/', Express.static(__dirname + '/app'));
 
 const sequelize = new Sequelize({
   dialect: "sqlite",
