@@ -10,7 +10,7 @@ const SchemaValidationMiddleware = require("../common/middlewares/SchemaValidati
 const loginPayload = require("./schemas/loginPayload");
 
 router.get(
-    "/",
+    "/ping",
     AuthorizationController.ping
   );
 

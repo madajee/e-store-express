@@ -10,5 +10,16 @@ module.exports = {
     DOLLAR: 'dollar',
     EURO: 'euro',
     INR: 'inr'
+  },
+  HOST: "localhost",
+  USER: "mulejohn",
+  PASSWORD: "mulejohn",
+  DB: "testdb",
+  dialect: "postgres",
+  pool: {
+    max: 5,
+    min: 0,
+    acquire: 30000,
+    idle: 10000
   }
 }
