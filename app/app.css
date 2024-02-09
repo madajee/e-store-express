@@ -48,19 +48,6 @@ body {
   font-size:15px
 }
 
-@media screen and (max-width: 992px) {
-  .hide-for-mobile{
-    display: none;
-  }
-  footer{
-    display: none;
-  }
-}
-
-ul.space_list li { margin-bottom: 1em; }
-
-.tab { margin-left: 40px; }
-
 .w3r-dot {
   width: 1300px;
   height: 7 0px;
