@@ -22,3 +22,26 @@ const sequelize = new Sequelize({
 });
 5. "ajv": Ajv takes a schema for your JSON data and converts it into a very efficient JavaScript code that validates your data according to the schema.
 
+**************************************************************************************
+curl --location 'http://localhost:3000/ping'
+
+curl --location 'http://localhost:3000/login' \
+--header 'Content-Type: application/json' \
+--data '{
+    "username": "user101",
+    "password": "test"
+}'
+
+curl --location 'http://localhost:3000/user/all' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoidXNlcjEwMSIsImlhdCI6MTcwOTY3NDczOCwiZXhwIjoxNzA5Njc4MzM4fQ.YVk0EAEuWnb4JKWJBsonhS0xisfzQ1SYQO8XyffTxto'
+
+curl --location 'http://localhost:3000/signup' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "username": "user101",
+    "password": "test",
+    "email": "test@test.com",
+    "age": 34,
+    "firstName": "John",
+    "lastName": "Doe"
+}'

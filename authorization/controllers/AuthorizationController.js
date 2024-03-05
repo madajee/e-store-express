@@ -63,15 +63,6 @@ module.exports = {
         });
       });
   },
-  logintest: (req, res) => {
-    const { username, password } = req.body;
-    return res.status(200).json({
-      status: true,
-      data: {
-        token: 'test',
-      }
-    });
-  },
   login: (req, res) => {
     const { username, password } = req.body;
 

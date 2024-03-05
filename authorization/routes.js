@@ -8,6 +8,7 @@ const SchemaValidationMiddleware = require("../common/middlewares/SchemaValidati
 
 // JSON Schema Imports for payload verification
 const loginPayload = require("./schemas/loginPayload");
+const registerPayload = require("./schemas/registerPayload");
 
 router.get(
     "/ping",
@@ -16,6 +17,7 @@ router.get(
 
 router.post(
   "/signup",
+  [SchemaValidationMiddleware.verify(registerPayload)],
   AuthorizationController.register
 );
 
