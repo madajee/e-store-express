@@ -45,3 +45,15 @@ curl --location 'http://localhost:3000/signup' \
     "firstName": "John",
     "lastName": "Doe"
 }'
+
+export DOCKER_CLI=/Applications/Docker.app/Contents/Resources/bin
+export PATH=$PATH:$DOCKER_CLI
+
+docker build -t e-store-express .
+docker images
+docker-compose up -d
+docker-compose down
+docker system prune -a
+
+docker volume ls
+docker volume rm e-store-express_db-data

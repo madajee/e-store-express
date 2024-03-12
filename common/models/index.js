@@ -13,9 +13,20 @@ const Sequelize = require("sequelize");
 //   }
 // });
 
-const sequelize = new Sequelize({
-  dialect: "sqlite",
-  storage: "./storage/data.db", // Path to the file that will store the SQLite DB.
+// const sequelize = new Sequelize({
+//   dialect: "sqlite",
+//   storage: "./storage/data.db", // Path to the file that will store the SQLite DB.
+// });
+
+const sequelize = new Sequelize(dbConfig.dockerize.DB, dbConfig.dockerize.USER, dbConfig.dockerize.PASSWORD, {
+  host: dbConfig.dockerize.HOST,
+  dialect: dbConfig.dialect,
+  pool: {
+      max: dbConfig.pool.max,
+      min: dbConfig.pool.min,
+      acquire: dbConfig.pool.acquire,
+      idle: dbConfig.pool.idle
+  }
 });
 
 const db = {};
