@@ -25,6 +25,17 @@ const sequelize = new Sequelize({
 **************************************************************************************
 curl --location 'http://localhost:3000/ping'
 
+curl --location 'http://localhost:3000/signup' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "username": "user101",
+    "password": "test",
+    "email": "test@test.com",
+    "age": 34,
+    "firstName": "John",
+    "lastName": "Doe"
+}'
+
 curl --location 'http://localhost:3000/login' \
 --header 'Content-Type: application/json' \
 --data '{
@@ -35,15 +46,39 @@ curl --location 'http://localhost:3000/login' \
 curl --location 'http://localhost:3000/user/all' \
 --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoidXNlcjEwMSIsImlhdCI6MTcwOTY3NDczOCwiZXhwIjoxNzA5Njc4MzM4fQ.YVk0EAEuWnb4JKWJBsonhS0xisfzQ1SYQO8XyffTxto'
 
-curl --location 'http://localhost:3000/signup' \
+curl --location 'http://localhost:3000/user' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoidXNlcjEwMSIsImlhdCI6MTcxMDU5ODE4NCwiZXhwIjoxNzEwNjAxNzg0fQ.8bwNZhNZFDaIO1n2vBnJSARnGUS2XahPLN7lQOhtBW4'
+
+curl --location --request PATCH 'http://localhost:3000/user' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoidXNlcjEwMSIsImlhdCI6MTcxMDU5ODE4NCwiZXhwIjoxNzEwNjAxNzg0fQ.8bwNZhNZFDaIO1n2vBnJSARnGUS2XahPLN7lQOhtBW4' \
 --header 'Content-Type: application/json' \
---data-raw '{
-    "username": "user101",
-    "password": "test",
-    "email": "test@test.com",
-    "age": 34,
-    "firstName": "John",
-    "lastName": "Doe"
+--data '{
+    "username": "user101" 
+}'
+
+curl --location --request DELETE 'http://localhost:3000/user/1' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoidXNlcjEwMSIsImlhdCI6MTcxMDU5ODE4NCwiZXhwIjoxNzEwNjAxNzg0fQ.8bwNZhNZFDaIO1n2vBnJSARnGUS2XahPLN7lQOhtBW4' \
+--data ''
+
+curl --location --request PATCH 'http://localhost:3000/user' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoidXNlcjEwMSIsImlhdCI6MTcxMDU5ODE4NCwiZXhwIjoxNzEwNjAxNzg0fQ.8bwNZhNZFDaIO1n2vBnJSARnGUS2XahPLN7lQOhtBW4' \
+--header 'Content-Type: application/json' \
+--data '{
+    "username": "user101" 
+}'
+
+curl --location --request PATCH 'http://localhost:3000/user/change-role/2' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoidXNlcjEwMSIsImlhdCI6MTcxMDU5ODE4NCwiZXhwIjoxNzEwNjAxNzg0fQ.8bwNZhNZFDaIO1n2vBnJSARnGUS2XahPLN7lQOhtBW4' \
+--header 'Content-Type: application/json' \
+--data '{
+    "role": "user" 
+}'
+
+curl --location --request PATCH 'http://localhost:3000/user/change-role/2' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoidXNlcjEwMSIsImlhdCI6MTcxMDU5ODE4NCwiZXhwIjoxNzEwNjAxNzg0fQ.8bwNZhNZFDaIO1n2vBnJSARnGUS2XahPLN7lQOhtBW4' \
+--header 'Content-Type: application/json' \
+--data '{
+    "role": "user" 
 }'
 
 export DOCKER_CLI=/Applications/Docker.app/Contents/Resources/bin
