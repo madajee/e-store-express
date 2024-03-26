@@ -9,6 +9,7 @@ const PORT = process.env.PORT || port;
 // Express Routes Import
 const AuthorizationRoutes = require("./authorization/routes");
 const UserRoutes = require("./users/routes");
+const AmqpRoutes = require("./common/amqpqueues/amqproutes");
 
 // Sequelize model imports
 //const UserModel = require("./common/models/User");
@@ -36,9 +37,12 @@ db.sequelize.sync()
   .catch((err) => {
     console.log("Failed to sync db: " + err.message);
   });
+  const amqpqueues = require("./common/amqpqueues");
+  amqpqueues.connectQueue();
   require("./common/routes/turorial.routes")(app);
   app.use("/", AuthorizationRoutes);
   app.use("/user", UserRoutes);
+  app.use("/testq", AmqpRoutes);
 
   app.listen(PORT, () => {
     console.log("Server Listening on PORT:", port);

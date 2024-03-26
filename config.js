@@ -27,5 +27,9 @@ module.exports = {
     USER: "postgres",
     PASSWORD: "password",
     DB: "testdb",
+  },
+  amqpqueues: {
+    HOST: "localhost",
+    PORT: "5672"
   }
 }

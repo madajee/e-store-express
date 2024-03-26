@@ -92,3 +92,9 @@ docker system prune -a
 
 docker volume ls
 docker volume rm e-store-express_db-data
+
+https://sharmilas.medium.com/get-started-with-rabbitmq-in-node-js-1adb18d019d0
+
+docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.9-management
+
+curl --location 'http://localhost:3000/testq/send-msg'
