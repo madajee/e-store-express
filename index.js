@@ -3,7 +3,7 @@ const app = Express();
 const cors = require("cors");
 const { Sequelize } = require("sequelize");
 
-const { port } = require("./config");
+const { port, ff } = require("./config");
 const PORT = process.env.PORT || port;
 
 // Express Routes Import
@@ -38,11 +38,14 @@ db.sequelize.sync()
     console.log("Failed to sync db: " + err.message);
   });
   const amqpqueues = require("./common/amqpqueues");
-  amqpqueues.connectQueue();
+  if (ff.amqpqueues) {
+    amqpqueues.connectQueue();
+    app.use("/testq", AmqpRoutes);
+  }
   require("./common/routes/turorial.routes")(app);
   app.use("/", AuthorizationRoutes);
   app.use("/user", UserRoutes);
-  app.use("/testq", AmqpRoutes);
+ 
 
   app.listen(PORT, () => {
     console.log("Server Listening on PORT:", port);

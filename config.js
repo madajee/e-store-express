@@ -31,5 +31,11 @@ module.exports = {
   amqpqueues: {
     HOST: "localhost",
     PORT: "5672"
+  },
+  ff: {
+    amqpqueues: false
+  },
+  events: {
+    CHANGEROLE: "changerole"
   }
 }

@@ -1,5 +1,6 @@
 const UserModel = require("./../../common/models/User");
-
+const { events } = require("../../config");
+const emtr = require("../../common/eventemitter/emitter");
 module.exports = {
   getUser: (req, res) => {
     const {
@@ -95,6 +96,9 @@ module.exports = {
   },
 
   changeRole: (req, res) => {
+    emtr.on(events.CHANGEROLE, () => {
+      console.log("change role for user done");
+    });
     const {
       params: { userId },
       body: { role },
@@ -105,6 +109,7 @@ module.exports = {
         return UserModel.findUser({ id: userId });
       })
       .then((user) => {
+        emtr.emit(events.CHANGEROLE);
         return res.status(200).json({
           status: true,
           data: user.toJSON(),
