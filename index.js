@@ -9,6 +9,7 @@ const PORT = process.env.PORT || port;
 // Express Routes Import
 const AuthorizationRoutes = require("./authorization/routes");
 const UserRoutes = require("./users/routes");
+const ProductRoutes = require("./products/routes");
 const AmqpRoutes = require("./common/amqpqueues/amqproutes");
 
 // Sequelize model imports
@@ -45,6 +46,7 @@ db.sequelize.sync()
   require("./common/routes/turorial.routes")(app);
   app.use("/", AuthorizationRoutes);
   app.use("/user", UserRoutes);
+  app.use("/product", ProductRoutes);
  
 
   app.listen(PORT, () => {

@@ -81,6 +81,15 @@ curl --location --request PATCH 'http://localhost:3000/user/change-role/2' \
     "role": "user" 
 }'
 
+curl --location 'http://localhost:3000/product/all'
+
+curl --location 'http://localhost:3000/product' \
+--header 'Content-Type: application/json' \
+--data '{
+    "name": "book1",
+    "description": "test book 1"
+}'
+
 export DOCKER_CLI=/Applications/Docker.app/Contents/Resources/bin
 export PATH=$PATH:$DOCKER_CLI
 
