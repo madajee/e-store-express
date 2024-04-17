@@ -10,6 +10,8 @@ const PORT = process.env.PORT || port;
 const AuthorizationRoutes = require("./authorization/routes");
 const UserRoutes = require("./users/routes");
 const ProductRoutes = require("./products/routes");
+const CartRoutes = require("./cart/routes");
+const CartItemRoutes = require("./cart/cartitemroutes");
 const AmqpRoutes = require("./common/amqpqueues/amqproutes");
 
 // Sequelize model imports
@@ -31,7 +33,7 @@ app.use('/', Express.static(__dirname + '/app'));
 // UserModel.initialise(sequelize);
 
 const db = require("./common/models");
-db.sequelize.sync()
+db.sequelize.sync({force: true})
   .then(() => {
     console.log("Synced db.");
   })
@@ -47,6 +49,8 @@ db.sequelize.sync()
   app.use("/", AuthorizationRoutes);
   app.use("/user", UserRoutes);
   app.use("/product", ProductRoutes);
+  app.use("/cart", CartRoutes);
+  app.use("/cartitem", CartItemRoutes);
  
 
   app.listen(PORT, () => {

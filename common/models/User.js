@@ -26,6 +26,8 @@ const UserModel = {
 module.exports = {
   initialise: (sequelize) => {
     this.model = sequelize.define("user", UserModel);
+    const user = this.model;
+    return user;
   },
 
   createUser: (user) => {

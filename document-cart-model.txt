@@ -1,0 +1,159 @@
+1. User will have one cart and cart can have many products through cart items. Use sequelize hasOne() and belongsToMany() to define the relationship. 
+2. Expose a route to get all products for a logged in user. This route requires a logged in user, so it requires a authencation check with a token. Retrieve the authenticated user, use the getCart() relationship method for user cart and then use getProducts() method on cart to retrive the products.
+
+Test Case
+1: Signup with user101 and user102 and jot down the token-1 for user101 and token-2 for user102. token-1 and token-2 should be different.
+2. Create 3 products with id as 1, 2 and 3 for book1, book2 and book3.
+3. Create 2 cart for user101 with id 1 and user102 with id 2.
+4. create 2 cart items for user 101 and cart with id 1 and cart item as book1 and book2.
+5. create 1 cart item with user102 and cart with id 2 and cart item as book3.
+6. call the get cart for user101 passing the token-1 and the response should be book1 and book2.
+7. call the get cart for user102 passing the token-2 and the response should be book3.
+
+****************************** step 1 *****************************************
+curl --location 'http://localhost:3000/signup' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "username": "user101",
+    "password": "test",
+    "email": "test@test.com",
+    "age": 34,
+    "firstName": "John",
+    "lastName": "Doe"
+}'
+
+token-1: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoidXNlcjEwMSIsImlhdCI6MTcxMzM3NDEyMCwiZXhwIjoxNzEzMzc3NzIwfQ.SgAdiuwy9Y484EqHZZz5vnWx5la-UIG6-lytGmPiLMU
+
+curl --location 'http://localhost:3000/signup' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "username": "user102",
+    "password": "test",
+    "email": "test@test.com",
+    "age": 34,
+    "firstName": "Jane",
+    "lastName": "Doe"
+}'
+token-2: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInVzZXJuYW1lIjoidXNlcjEwMiIsImlhdCI6MTcxMzM3NDE1MywiZXhwIjoxNzEzMzc3NzUzfQ.aIX6MkWJ4CgTodrt5hBI0e7ZDRBSCVzp-ycm0Y80ojk
+
+****************************** step 1 *****************************************
+
+****************************** step 2 *****************************************
+curl --location 'http://localhost:3000/product' \
+--header 'Content-Type: application/json' \
+--data '{
+    "name": "book1",
+    "description": "test book 1"
+}'
+
+"id": 1
+
+curl --location 'http://localhost:3000/product' \
+--header 'Content-Type: application/json' \
+--data '{
+    "name": "book2",
+    "description": "test book 2"
+}'
+
+"id": 2
+
+curl --location 'http://localhost:3000/product' \
+--header 'Content-Type: application/json' \
+--data '{
+    "name": "book3",
+    "description": "test book 3"
+}'
+
+"id": 3
+****************************** step 2 *****************************************
+
+****************************** step 3 *****************************************
+
+curl --location 'http://localhost:3000/cart' \
+--header 'Content-Type: application/json' \
+--data '{
+    "userId": "1"
+}'
+
+"id": 1,
+"userId": 1,
+
+curl --location 'http://localhost:3000/cart' \
+--header 'Content-Type: application/json' \
+--data '{
+    "userId": "2"
+}'
+
+"id": 2,
+"userId": 2
+
+****************************** step 4 *****************************************
+
+curl --location 'http://localhost:3000/cartitem' \
+--header 'Content-Type: application/json' \
+--data '{
+    "quantity": "1",
+    "productId": "1",
+    "cartId": "1"
+}'
+
+"id": 1,
+"quantity": 1,
+"productId": 1,
+"cartId": 1,
+
+curl --location 'http://localhost:3000/cartitem' \
+--header 'Content-Type: application/json' \
+--data '{
+    "quantity": "2",
+    "productId": "2",
+    "cartId": "1"
+}'
+
+"id": 2,
+"quantity": 2,
+"productId": 2,
+"cartId": 1,
+
+****************************** step 4 *****************************************
+
+****************************** step 5 *****************************************
+
+curl --location 'http://localhost:3000/cartitem' \
+--header 'Content-Type: application/json' \
+--data '{
+    "quantity": "1",
+    "productId": "3",
+    "cartId": "2"
+}'
+
+"id": 3,
+"quantity": 1,
+"productId": 3,
+"cartId": 2,
+****************************** step 5 *****************************************
+
+****************************** step 6 *****************************************
+
+curl --location 'http://localhost:3000/cart' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoidXNlcjEwMSIsImlhdCI6MTcxMzM3NDEyMCwiZXhwIjoxNzEzMzc3NzIwfQ.SgAdiuwy9Y484EqHZZz5vnWx5la-UIG6-lytGmPiLMU'
+
+Response:
+{"status":true,"data":{"products":[{"id":1,"name":"book1","description":"test book 1","createdAt":"2024-04-17T17:16:27.274Z","updatedAt":"2024-04-17T17:16:27.274Z","cartitem":{"id":1,"quantity":1,"createdAt":"2024-04-17T17:18:15.373Z","updatedAt":"2024-04-17T17:18:15.373Z","cartId":1,"productId":1}},{"id":2,"name":"book2","description":"test book 2","createdAt":"2024-04-17T17:16:34.516Z","updatedAt":"2024-04-17T17:16:34.516Z","cartitem":{"id":2,"quantity":2,"createdAt":"2024-04-17T17:19:04.775Z","updatedAt":"2024-04-17T17:19:04.775Z","cartId":1,"productId":2}}]}}
+
+****************************** step 6 *****************************************
+
+****************************** step 7 *****************************************
+
+curl --location 'http://localhost:3000/cart' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInVzZXJuYW1lIjoidXNlcjEwMiIsImlhdCI6MTcxMzM3NDE1MywiZXhwIjoxNzEzMzc3NzUzfQ.aIX6MkWJ4CgTodrt5hBI0e7ZDRBSCVzp-ycm0Y80ojk'
+
+Response:
+{"status":true,"data":{"products":[{"id":3,"name":"book3","description":"test book 3","createdAt":"2024-04-17T17:16:42.436Z","updatedAt":"2024-04-17T17:16:42.436Z","cartitem":{"id":3,"quantity":1,"createdAt":"2024-04-17T17:20:06.836Z","updatedAt":"2024-04-17T17:20:06.836Z","cartId":2,"productId":3}}]}}
+
+****************************** step 7 *****************************************
+
+
+
+
+

@@ -19,6 +19,8 @@ const ProductModel = {
   module.exports = { 
     initialise: (sequelize) => {
         this.model = sequelize.define("product", ProductModel);
+        const product = this.model;
+       return product;
     },
     findAllProducts: (query) => {
       return this.model.findAll({

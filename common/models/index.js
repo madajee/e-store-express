@@ -37,7 +37,16 @@ db.sequelize = sequelize;
 db.tutorials = require("./tutorial.model.js")(sequelize, Sequelize);
 const UserModel = require("./User.js");
 const ProductModel = require("./Product.js");
-UserModel.initialise(sequelize);
+const CartModel = require("./Cart.js");
+const CartItemModel = require("./CartItem.js");
+const User = UserModel.initialise(sequelize);
+const Product = ProductModel.initialise(sequelize);
+const Cart = CartModel.initialise(sequelize);
+const CartItem = CartItemModel.initialise(sequelize);
+User.hasOne(Cart);
+Cart.belongsTo(User);
+Cart.belongsToMany(Product, {through: CartItem});
+Product.belongsToMany(Cart, {through: CartItem});
 ProductModel.initialise(sequelize);
 
 module.exports = db;
