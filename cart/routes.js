@@ -18,4 +18,9 @@ router.get(
     CartController.getAllProducts
   );
 
+router.post(
+  "/deleteCartProduct", [isAuthenticatedMiddleware.check],
+  CartController.deleteCartProduct
+);
+
   module.exports = router;

@@ -153,6 +153,15 @@ Response:
 
 ****************************** step 7 *****************************************
 
+****************************** delete cart product **********************************
+
+curl --location 'http://localhost:3000/cart/deletecartproduct' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoidXNlcjEwMSIsImlhdCI6MTcxMzQ4MTE1NSwiZXhwIjoxNzEzNDg0NzU1fQ.u-wLkfzYiwM7FLOJxeD5KI8hyqes2RjJFp7Mosmnjr8' \
+--header 'Content-Type: application/json' \
+--data '{
+    "productId": "1"
+}'
+
 
 
 
