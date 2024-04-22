@@ -162,6 +162,15 @@ curl --location 'http://localhost:3000/cart/deletecartproduct' \
     "productId": "1"
 }'
 
+****************************** add cart product **********************************
+curl --location 'http://localhost:3000/cart/addcartproduct' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoidXNlcjEwMSIsImlhdCI6MTcxMzgwOTIyMSwiZXhwIjoxNzEzODEyODIxfQ.Zhz3bdfZCkYIrvhI8HgamWRpEEwyi-2uoiB5byUAcFs' \
+--header 'Content-Type: application/json' \
+--data '{
+    "quantity": "1",
+    "productId": "1"
+}'
+
 
 
 

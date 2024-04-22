@@ -23,4 +23,9 @@ router.post(
   CartController.deleteCartProduct
 );
 
-  module.exports = router;
+router.post(
+  "/addCartProduct", [isAuthenticatedMiddleware.check],
+  CartController.addCartProduct
+);
+
+module.exports = router;

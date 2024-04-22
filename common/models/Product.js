@@ -30,4 +30,9 @@ const ProductModel = {
     createProduct: (product) => {
       return this.model.create(product);
     },
+    findProduct: (query) => {
+      return this.model.findOne({
+        where: query,
+      });
+    },
   }
