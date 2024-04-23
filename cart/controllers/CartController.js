@@ -145,17 +145,30 @@ module.exports = {
           fetchedCart = cart;
           cart.getProducts({id: productId})
           .then((products => {
+            console.log('In existing product' + products[0]);
             let product;
             if (products.length > 0) {
               product = products[0];
             }
             if (product) {
-
+              console.log('In existing product' + product.cartitem.quantity);
+              let newqty = parseInt(quantity, 10) + product.cartitem.quantity;
+              console.log('new quantitiy' + newqty);
+              fetchedCart.addProduct(product.toJSON().id, { through: {quantity: newqty}})
+              .then((result) => {
+                console.log('in update' + result);
+              })
+              .catch()
+              return res.status(200).json({
+                data: user.toJSON(),
+                status: true
+              });
             }
             ProductModel.findProduct({ id: productId })
             .then((product => {
               console.log(product);
-              fetchedCart.addProduct(product.toJSON().id, { through: {quantity: 1}})
+              let newqty = parseInt(quantity, 10)
+              fetchedCart.addProduct(product.toJSON().id, { through: {quantity: newqty}})
               .then((result) => {
                 console.log(result);
                 return res.status(200).json({
