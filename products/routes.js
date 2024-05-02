@@ -10,4 +10,7 @@ router.post(
   "/", ProductController.createProduct
 );
 
+router.delete(
+  "/:productId", ProductController.deleteProduct
+);
   module.exports = router;

@@ -35,4 +35,9 @@ const ProductModel = {
         where: query,
       });
     },
+    deleteProduct: (query) => {
+      return this.model.destroy({
+        where: query,
+      });
+    }
   }
