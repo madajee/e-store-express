@@ -54,5 +54,36 @@ module.exports = {
           error: err,
         });
       });
-    }
+    },
+    updateProduct: (req, res) => { 
+      const {
+        params: { productId },
+        body: payload,
+      } = req;
+
+      if (!Object.keys(payload).length) {
+        return res.status(400).json({
+          status: false,
+          error: {
+            message: "Body is empty, hence can not update the user.",
+          },
+        });
+      }
+      ProductModel.updateProduct({ id: productId }, payload)
+      .then(() => {
+        return ProductModel.findProduct({ id: productId });
+      })
+      .then((product) => {
+        return res.status(200).json({
+          status: true,
+          data: product.toJSON(),
+        });
+      })
+      .catch((err) => {
+        return res.status(500).json({
+          status: false,
+          error: err,
+        });
+      });
+  },
 }

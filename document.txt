@@ -90,6 +90,14 @@ curl --location 'http://localhost:3000/product' \
     "description": "test book 1"
 }'
 
+curl --location --request DELETE 'http://localhost:3000/product/1'
+
+curl --location --request PATCH 'http://localhost:3000/product/1' \
+--header 'Content-Type: application/json' \
+--data '{
+    "description": "test book 2"
+}'
+
 export DOCKER_CLI=/Applications/Docker.app/Contents/Resources/bin
 export PATH=$PATH:$DOCKER_CLI
 

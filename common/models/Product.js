@@ -39,5 +39,10 @@ const ProductModel = {
       return this.model.destroy({
         where: query,
       });
+    },
+    updateProduct: (query, updatedValue) => {
+      return this.model.update(updatedValue, {
+        where: query,
+      });
     }
   }

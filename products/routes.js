@@ -10,6 +10,10 @@ router.post(
   "/", ProductController.createProduct
 );
 
+router.patch(
+  "/:productId", ProductController.updateProduct
+)
+
 router.delete(
   "/:productId", ProductController.deleteProduct
 );
