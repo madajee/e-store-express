@@ -13,6 +13,7 @@ const ProductRoutes = require("./products/routes");
 const CartRoutes = require("./cart/routes");
 const CartItemRoutes = require("./cart/cartitemroutes");
 const AmqpRoutes = require("./common/amqpqueues/amqproutes");
+const OrderRoutes = require("./order/routes");
 
 // Sequelize model imports
 //const UserModel = require("./common/models/User");
@@ -51,6 +52,7 @@ db.sequelize.sync({force: true})
   app.use("/product", ProductRoutes);
   app.use("/cart", CartRoutes);
   app.use("/cartitem", CartItemRoutes);
+  app.use("/order", OrderRoutes);
  
 
   app.listen(PORT, () => {
