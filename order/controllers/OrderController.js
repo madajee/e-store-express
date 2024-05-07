@@ -40,7 +40,7 @@ module.exports = {
     addOrderProduct: (req, res) => {
         const productId = req.body.productId
         const quantity = req.body.quantity
-        let fetchedCart;
+        let fetchedOrder;
         //console.log(productId);
         const {
           user: { userId },
@@ -49,19 +49,58 @@ module.exports = {
         .then((user) => {
             user.getOrder()
             .then((order) => {
+                fetchedOrder= order;
+                // order.getProducts({id: productId})
+                // .then((products) => {
+                //   console.log('In existing product' + JSON.stringify(products[0]));
+                //   let product;
+                //   if (products.length > 0) {
+                //     product = products[0];
+                //   }
+                //   if (product) {
+                //     console.log('In existing product');
+                //     let newqty = parseInt(quantity, 10) + product.orderitem.quantity;
+                //     console.log('new quantitiy' + newqty);
+                //     fetchedOrder.addProduct(product.toJSON().id, { through: {quantity: newqty}})
+                //     .then((result) => {
+                //       console.log('in update' + result);
+                //     })
+                //     .catch()
+                //     return res.status(200).json({
+                //       data: user.toJSON(),
+                //       status: true
+                //     });
+                //   }
+                // })
+                // .catch((err) => {
+                //   return res.status(500).json({
+                //     status: false,
+                //     error: err,
+                //   });
+                // })
                 ProductModel.findProduct({ id: productId })
-                .then((product) => {
-                    console.log(product);
+                .then((product)=>{
+                  let newqty = parseInt(quantity, 10);
+                  fetchedOrder.addProduct(product.toJSON().id, { through: {quantity: newqty}})
+                  .then((result) => {
+                    console.log('in add' + result);
                     return res.status(200).json({
-                        status: true,
-                        data: order.toJSON()
-                      });
+                      status: true,
+                      data: order.toJSON(),
+                    });
+                  })
+                  .catch((err) => {
+                    return res.status(500).json({
+                      status: false,
+                      error: err,
+                    });
+                  })
                 })
                 .catch((err) => {
-                    return res.status(500).json({
-                        status: false,
-                        error: err,
-                    });
+                  return res.status(500).json({
+                    status: false,
+                    error: err,
+                  });
                 })
             })
             .catch((err) => {
@@ -69,13 +108,13 @@ module.exports = {
                     status: false,
                     error: err,
                 });
-                })
+            })
         })
         .catch((err) => {
             return res.status(500).json({
                 status: false,
                 error: err,
             });
-            });
+        });
     }
 }
