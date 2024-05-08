@@ -18,6 +18,11 @@ router.post(
     OrderController.addOrderProduct
   );
 
+router.post(
+  "/removeOrderProduct", [isAuthenticatedMiddleware.check],
+  OrderController.removeOrderProduct
+);
+
 // router.get(
 //     "/", [isAuthenticatedMiddleware.check],
 //     CartController.getAllProducts

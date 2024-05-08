@@ -116,5 +116,57 @@ module.exports = {
                 error: err,
             });
         });
+    },
+    removeOrderProduct: (req, res) => {
+      const productId = req.body.productId;
+      let fetchedOrder;
+        const {
+          user: { userId },
+        } = req;
+      UserModel.findUser({ id: userId })
+        .then((user) => {
+          user.getOrder()
+          .then((order) => {
+              fetchedOrder= order;
+              order.getProducts({id: productId})
+              .then((products) => {
+                const product = products[0];
+                //console.log(product);
+                product.orderitem.destroy()
+                .then(() => {
+                  console.log('Deleted Order Item');
+                })
+                .catch((err) => {
+                  return res.status(500).json({
+                      status: false,
+                      error: err,
+                  });
+                });
+              })
+              .catch((err) => {
+                return res.status(500).json({
+                    status: false,
+                    error: err,
+                });
+              });
+              return res.status(200).json({
+                status: true,
+                data: order.toJSON()
+              });
+          })
+          .catch((err) => {
+            return res.status(500).json({
+                status: false,
+                error: err,
+            });
+          });
+
+        })
+        .catch((err) => {
+          return res.status(500).json({
+              status: false,
+              error: err,
+          });
+        });
     }
 }
